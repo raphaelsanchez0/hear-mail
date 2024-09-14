@@ -15,7 +15,7 @@ export default function EmailList() {
           </div>
         </form>
       </div>
-      <ScrollArea className="h-[calc(100vh-5rem)] w-full">
+      <ScrollArea className="h-[calc(100vh-5rem)] w-full px-4">
         {[...Array(20)].map((_, i) => (
           <ListEmail
             key={i}

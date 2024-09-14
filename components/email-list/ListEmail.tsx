@@ -18,7 +18,7 @@ export default function ListEmail({ sender, subject, body }: ListEmailProps) {
       <h3 className="font-semibold">{sender}</h3>
       <h3 className="font-semibold">{subject}</h3>
       <div className="text-sm text-ellipsis overflow-hidden whitespace-nowrap max-w-full">
-        {truncateText(body, 40)}
+        {truncateText(body, 35)}
       </div>
     </Card>
   );
