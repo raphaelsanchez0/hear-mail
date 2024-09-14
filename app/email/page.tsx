@@ -1,3 +1,4 @@
+import EmailList from "@/components/email-list/EmailList";
 import NavButton from "@/components/nav-button/NavButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,24 +21,7 @@ export default function EmailClientPage() {
       </div>
 
       {/* Email List */}
-      <div className="w-80 border-r">
-        <div className="p-4">
-          <div className="relative">
-            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input placeholder="Search emails" className="pl-8" />
-          </div>
-        </div>
-        <ScrollArea className="h-[calc(100vh-5rem)]">
-          {[...Array(20)].map((_, i) => (
-            <div key={i} className="p-4 hover:bg-muted cursor-pointer">
-              <h3 className="font-semibold">Email Subject {i + 1}</h3>
-              <p className="text-sm text-muted-foreground">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-            </div>
-          ))}
-        </ScrollArea>
-      </div>
+      <EmailList />
 
       {/* Email Content */}
       <div className="flex-1 p-4">
