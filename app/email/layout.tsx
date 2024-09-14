@@ -5,10 +5,26 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Mail, Inbox, Send, File, Trash2, Search } from "lucide-react";
 
-export default function EmailClientPage() {
+export default function EmailClientPage({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <>
-      {/* Email List */}
+    <div className="flex h-screen bg-background">
+      {/* Sidebar */}
+      <div className="w-44 bg-muted p-4 flex flex-col">
+        <Button className="w-full mb-4">Compose</Button>
+        <nav className="space-y-2">
+          <NavButton name="Inbox" icon={<Inbox className="mr-2 h-4 w-4" />} />
+          <NavButton name="Sent" icon={<Send className="mr-2 h-4 w-4" />} />
+          <NavButton name="Drafts" icon={<File className="mr-2 h-4 w-4" />} />
+          <NavButton name="Trash" icon={<Trash2 className="mr-2 h-4 w-4" />} />
+        </nav>
+      </div>
+      {children}
+
+      {/* Email List
       <div className="w-80 border-r">
         <div className="p-4">
           <div className="relative">
@@ -26,10 +42,10 @@ export default function EmailClientPage() {
             </div>
           ))}
         </ScrollArea>
-      </div>
+      </div> */}
 
       {/* Email Content */}
-      <div className="flex-1 p-4">
+      {/* <div className="flex-1 p-4">
         <h2 className="text-2xl font-bold mb-4">Email Subject</h2>
         <div className="flex items-center mb-4">
           <div className="w-8 h-8 rounded-full bg-primary mr-2" />
@@ -46,7 +62,7 @@ export default function EmailClientPage() {
           interdum, nisl nunc egestas nunc, vitae tincidunt nisl nunc euismod
           nunc.
         </p>
-      </div>
-    </>
+      </div> */}
+    </div>
   );
 }
