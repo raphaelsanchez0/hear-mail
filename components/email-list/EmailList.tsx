@@ -1,10 +1,19 @@
-import { Search } from "lucide-react";
-import React from "react";
+import { List, Search } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import ListEmail from "./ListEmail";
+import { useSession } from "next-auth/react";
+import { GmailMessage } from "@/utils/types";
+import { getEmails } from "@/api/gmail/gmail";
+import { getServerSession } from "next-auth";
+import { authConfig } from "@/lib/auth";
 
-export default function EmailList() {
+export default async function EmailList() {
+  const session = await getServerSession(authConfig);
+
+  const emails = await getEmails(session!.accessToken as string, 20);
+
   return (
     <div className="w-80 border-r">
       <div className="bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -15,16 +24,11 @@ export default function EmailList() {
           </div>
         </form>
       </div>
-      <ScrollArea className="h-[calc(100vh-5rem)] w-full px-4">
-        {[...Array(20)].map((_, i) => (
-          <ListEmail
-            key={i}
-            sender="Sender Name"
-            subject="Email Subject"
-            body="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          />
+      <div className="h-[calc(100vh-5rem)] p-4 overflow-y-scroll">
+        {emails.map((email) => (
+          <ListEmail key={email.id} email={email} />
         ))}
-      </ScrollArea>
+      </div>
     </div>
   );
 }
