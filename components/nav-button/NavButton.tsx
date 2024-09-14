@@ -3,6 +3,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import { Inbox } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 interface NavButtonProps {
   name: string;
@@ -16,7 +17,7 @@ export default function NavButton({ name, icon }: NavButtonProps) {
     <Button
       variant="ghost"
       className="w-full justify-start"
-      onClick={() => router.push(`email/${name.toLowerCase()}`)}
+      onClick={() => router.push(`/email?folder=${name.toLowerCase()}`)}
     >
       {icon}
       {name}

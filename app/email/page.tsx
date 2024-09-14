@@ -7,7 +7,18 @@ import { Mail, Inbox, Send, File, Trash2, Search } from "lucide-react";
 
 export default function EmailClientPage() {
   return (
-    <>
+    <div className="flex h-screen bg-background">
+      {/* Sidebar */}
+      <div className="w-44 bg-muted p-4 flex flex-col">
+        <Button className="w-full mb-4">Compose</Button>
+        <nav className="space-y-2">
+          <NavButton name="Inbox" icon={<Inbox className="mr-2 h-4 w-4" />} />
+          <NavButton name="Sent" icon={<Send className="mr-2 h-4 w-4" />} />
+          <NavButton name="Drafts" icon={<File className="mr-2 h-4 w-4" />} />
+          <NavButton name="Trash" icon={<Trash2 className="mr-2 h-4 w-4" />} />
+        </nav>
+      </div>
+
       {/* Email List */}
       <div className="w-80 border-r">
         <div className="p-4">
@@ -47,6 +58,6 @@ export default function EmailClientPage() {
           nunc.
         </p>
       </div>
-    </>
+    </div>
   );
 }
