@@ -1,25 +1,21 @@
 import React from "react";
 import { Card } from "../ui/card";
+import { GmailMessage } from "@/utils/types";
+import { getSubject } from "@/utils/email/emailhelpers";
 
 interface ListEmailProps {
-  sender: string;
-  subject: string;
-  body: string;
+  email: GmailMessage;
 }
 
-export default function ListEmail({ sender, subject, body }: ListEmailProps) {
-  const truncateText = (text: string, maxLength: number) => {
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength) + "..."; // Add ellipsis to indicate truncation
-  };
+export default function ListEmail({ email }: ListEmailProps) {
+  console.log(email);
 
   return (
     <Card className="p-4 hover:bg-muted cursor-pointer max-w-full">
-      <h3 className="font-semibold">{sender}</h3>
-      <h3 className="font-semibold">{subject}</h3>
-      <div className="text-sm text-ellipsis overflow-hidden whitespace-nowrap max-w-full">
-        {truncateText(body, 35)}
-      </div>
+      <h3 className="font-semibold text-md w-full">{email.senderName}</h3>
+      <p className="text-md text-ellipsis overflow-hidden ... truncate">
+        {getSubject(email)}
+      </p>
     </Card>
   );
 }

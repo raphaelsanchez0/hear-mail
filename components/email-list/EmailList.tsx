@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { List, Search } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
@@ -12,29 +12,7 @@ import { authConfig } from "@/lib/auth";
 export default async function EmailList() {
   const session = await getServerSession(authConfig);
 
-  const emails = await getEmails(session!.accessToken as string);
-
-  // // Function to fetch emails
-  // const fetchEmails = async (accessToken: string) => {
-  //   setLoading(true);
-  //   setError("");
-
-  //   try {
-  //     const emailList = await getEmails(accessToken);
-  //     setEmails(emailList);
-  //   } catch (err) {
-  //     setError(`Failed to fetch emails: ${(err as Error).message}`);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // // useEffect to handle the side-effect of fetching emails
-  // useEffect(() => {
-  //   if (status === "authenticated" && session?.accessToken) {
-  //     fetchEmails(session.accessToken as string); // Type assertion
-  //   }
-  // }, [status, session]);
+  const emails = await getEmails(session!.accessToken as string, 20);
 
   return (
     <div className="w-80 border-r">
@@ -46,19 +24,11 @@ export default async function EmailList() {
           </div>
         </form>
       </div>
-      <ScrollArea className="h-[calc(100vh-5rem)] w-full px-4">
+      <div className="h-[calc(100vh-5rem)] p-4 overflow-y-scroll">
         {emails.map((email) => (
-          <li key={email.id}>{email.snippet}</li>
+          <ListEmail key={email.id} email={email} />
         ))}
-        {/* {[...Array(20)].map((_, i) => (
-          <ListEmail
-            key={i}
-            sender="Sender Name"
-            subject="Email Subject"
-            body="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          />
-        ))}  */}
-      </ScrollArea>
+      </div>
     </div>
   );
 }
