@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "../ui/card";
 import { GmailMessage } from "@/utils/types";
-import { getSubject } from "@/utils/email/emailhelpers";
+import { getSubject } from "@/utils/email/emailHelpers";
 
 interface ListEmailProps {
   email: GmailMessage;
