@@ -12,7 +12,7 @@ import React from "react";
 import { signOut } from "next-auth/react";
 export default function Settings() {
   return (
-    <div className="flex">
+    <div className="full-screen-page">
       <Sidebar />
       <div className="flex w-full">
         <Card className="w-full basis-1/3">

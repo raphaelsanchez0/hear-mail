@@ -19,7 +19,7 @@ export default function EmailClientPage() {
   };
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="full-screen-page">
       {/* Sidebar */}
       <Sidebar />
 
