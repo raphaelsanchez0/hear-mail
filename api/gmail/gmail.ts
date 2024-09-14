@@ -37,7 +37,23 @@ export const getEmails = async (
     );
 
     const emailDetails = await Promise.all(emailDetailsPromises);
-    return emailDetails;
+
+    const emailDetailsWithSenders = emailDetails.map((email) => {
+      const headers = email.payload.headers;
+      const fromHeader = headers.find((header: any) => header.name === "From");
+      let senderName = "Unknown Sender";
+
+      if (fromHeader && fromHeader.value) {
+        // Extract name before the "<" character
+        senderName = fromHeader.value.split("<")[0].trim();
+      }
+
+      return {
+        ...email,
+        senderName,
+      };
+    });
+    return emailDetailsWithSenders as unknown as GmailMessage[];
   } catch (error) {
     console.error("Error in getEmails:", error);
     throw error;
