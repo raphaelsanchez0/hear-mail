@@ -1,4 +1,4 @@
-'use client'; // This tells Next.js to treat this component as a Client Component
+"use client"; // This tells Next.js to treat this component as a Client Component
 
 import { useState } from "react";
 import EmailContent from "@/components/email-content/EmailContent";
@@ -57,7 +57,7 @@ export default function EmailClientPage() {
       <EmailContent mail={exampleMail} />
 
       {/* Compose Email Form */}
-      <div className="w-1/3 p-4">
+      {/* <div className="w-1/3 p-4">
         <h2>Compose Email</h2>
         <form onSubmit={sendEmail}>
           <Input
@@ -84,9 +84,9 @@ export default function EmailClientPage() {
           <Button type="submit" className="mt-2">
             Send Email
           </Button>
-        </form>
-        {responseMessage && <p className="mt-2">{responseMessage}</p>}
-      </div>
+        </form> */}
+      {/* {responseMessage && <p className="mt-2">{responseMessage}</p>} */}
+      {/* </div> */}
     </div>
   );
 }

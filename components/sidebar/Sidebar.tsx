@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import NavButton from "../nav-button/NavButton";
 import { Inbox, Send, Settings, Trash2, File } from "lucide-react";
-import ComposeEmailModal from "../compose-email/ComposeEmailModal";
+import { ComposeEmailDialog } from "../compose-email-dialog/ComposeEmailDialog";
 
 export default function Sidebar() {
   const [isComposeOpen, setComposeOpen] = useState(false);
@@ -13,14 +13,8 @@ export default function Sidebar() {
 
   return (
     <div className="w-44 bg-muted p-4 flex flex-col">
-      {/* Compose button opens the compose modal */}
-      <Button className="w-full mb-4" onClick={handleComposeClick}>
-        Compose
-      </Button>
-      
-      {/* Modal for composing email */}
-      {isComposeOpen && <ComposeEmailModal onClose={() => setComposeOpen(false)} />}
-
+      {/* <Button className="w-full mb-4">Compose</Button> */}
+      <ComposeEmailDialog />
       <nav className="space-y-2 flex flex-col h-full justify-between">
         <div>
           <NavButton name="Inbox" icon={<Inbox className="mr-2 h-4 w-4" />} />
