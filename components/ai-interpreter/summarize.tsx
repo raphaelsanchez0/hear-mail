@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from "react";
 import OpenAI from "openai";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const openAi = new OpenAI({
@@ -9,15 +8,13 @@ const openAi = new OpenAI({
     dangerouslyAllowBrowser:true
 })
 
-export function OpenAiProofOfConcept(){
-
-    const [input, setInput] = useState('')
+export function Summarization({ inputText} :{inputText:string}) {
     const [response, setResponse] = useState('')
 
     const handleClick = async() =>{
         const params:OpenAI.Chat.ChatCompletionCreateParams =
         {
-            messages: [{role: 'user', content: input }],
+            messages: [{role: 'user', content: "Summarize the following: " + inputText }],
             model: 'gpt-3.5-turbo'
         };
         const chatCompletion: OpenAI.Chat.ChatCompletion = await openAi.chat.completions.create(params);
@@ -29,9 +26,7 @@ export function OpenAiProofOfConcept(){
     return(
         <>
         <div className="flex">
-            <Input value={input} onChange={(e)=>{
-                setInput(e.target.value)
-            }} />
+            
             <Button onClick={()=>handleClick()}/>
                 
         </div>

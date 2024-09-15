@@ -1,3 +1,4 @@
+import { Summarization } from "@/components/ai-interpreter/summarize";
 import EmailContent from "@/components/email-content/EmailContent";
 import EmailList from "@/components/email-list/EmailList";
 import NavButton from "@/components/nav-button/NavButton";
@@ -8,14 +9,16 @@ import { Separator } from "@/components/ui/separator";
 import { Mail } from "@/utils/types";
 import { Inbox, Send, File, Trash2, Search } from "lucide-react";
 
+export const exampleMail: Mail = {
+  name: "John Doe",
+  subject: "Hello, World!",
+  recipientEmail: "johnDoe@gmail.com",
+  date: "2021-09-20T12:00:00Z",
+  body: "Hello, World! This is a test",
+};
+
 export default function EmailClientPage() {
-  const exampleMail: Mail = {
-    name: "John Doe",
-    subject: "Hello, World!",
-    recipientEmail: "johnDoe@gmail.com",
-    date: "2021-09-20T12:00:00Z",
-    body: "Hello, World! This is a test",
-  };
+  
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
@@ -33,7 +36,6 @@ export default function EmailClientPage() {
       <EmailList />
 
       {/* Email Content */}
-
       <EmailContent mail={exampleMail} />
 
     </div>
