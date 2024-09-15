@@ -9,7 +9,6 @@ export async function GET(req: NextRequest) {
   const emailId = url.get("emailId");
   const session = await getServerSession(authConfig);
   const userId = "me"; // Use 'me' to refer to the authenticated user
-  console.log("session " + session?.accessToken);
   try {
     const response = await fetch(
       `https://gmail.googleapis.com/gmail/v1/users/${userId}/messages/${emailId}`,
@@ -26,8 +25,9 @@ export async function GET(req: NextRequest) {
       console.log(response);
       throw new Error(`Error fetching email: ${response.statusText}`);
     }
-
     const emailData = await response.json();
+
+    console.dir(emailData, { depth: null });
     return Response.json(emailData);
   } catch (error) {
     console.error("Failed to fetch email:", error);

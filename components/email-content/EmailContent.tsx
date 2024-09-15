@@ -8,28 +8,27 @@ import { Label } from "../ui/label";
 import { Switch } from "../ui/switch";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
-import { Mail } from "@/utils/types";
+import { IncomingEmail, Mail } from "@/utils/types";
 import { format } from "date-fns/format";
 import { Session } from "next-auth";
 import { getEmail } from "@/api/gmail/gmail";
 import { useSearchParams } from "next/navigation";
+import { getEmailSender } from "@/utils/email/emailHelpers";
 
 interface EmailContentProps {
   session: Session | null;
 }
 
 export default function EmailContent({ session }: EmailContentProps) {
-  const [email, setEmail] = useState(null);
+  const [email, setEmail] = useState<IncomingEmail | null>(null);
   const searchParams = useSearchParams();
   const emailID = searchParams.get("emailId");
-  if (emailID) {
-    const email = getEmail(session!.accessToken as string, emailID);
-  }
 
   useEffect(() => {
-    const fetchEmail = async (id: string) => {
+    const fetchEmail = async (id: string | null) => {
+      if (!id) return;
       const email = await fetch(`/api/get-email?emailId=${id}`);
-      console.log(email);
+      setEmail(email as unknown as IncomingEmail);
     };
     fetchEmail(emailID);
   }, [emailID]);
@@ -65,12 +64,12 @@ export default function EmailContent({ session }: EmailContentProps) {
         </div>
       </div>
       <Separator className="my-4" />
-      {mail ? (
+      {email ? (
         <div className="flex flex-1 flex-col">
           <div className="flex items-start p-4">
             <div className="flex items-start gap-4 text-sm">
               <Avatar>
-                <AvatarImage alt={mail.name} />
+                <AvatarImage alt={getEmailSender(email)} />
                 <AvatarFallback>
                   {mail.name
                     .split(" ")
