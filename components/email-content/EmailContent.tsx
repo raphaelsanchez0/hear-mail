@@ -75,6 +75,8 @@ export default function EmailContent({ session }: EmailContentProps) {
   const emailId = searchParams.get("emailId"); // Extract emailId from URL
   const router = useRouter();
 
+  
+
   useEffect(() => {
     const fetchEmail = async (id: string | null) => {
       if (!id) return;
@@ -121,6 +123,7 @@ export default function EmailContent({ session }: EmailContentProps) {
     router.refresh();
     setShowSuccessModal(false);
   };
+  
 
   return (
     <div className="flex-1 p-4">
@@ -182,9 +185,11 @@ export default function EmailContent({ session }: EmailContentProps) {
             )}
 
             
-            <div className="whitespace-pre-wrap p-4 text-sm">
+            <div className="whitespace-pre-wrap p-2 text-sm">
               {/* Render HTML email body if it's HTML */}
-              <div dangerouslySetInnerHTML={{ __html: email.body }} />
+              {/* <div dangerouslySetInnerHTML={{ __html: email.body }} /> */}
+             { email &&
+             <EmailBody embailBody={email.body} email={email}/>}
             </div>
           </div>
         )

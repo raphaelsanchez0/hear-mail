@@ -8,15 +8,15 @@ import {
 import { Button } from "../ui/button";
 import OpenAI from "openai";
 
-interface SummaryToSpeechProps {
-  summery: string;
+interface ReadOutSpeechProps {
+  read: string;
   onClick:()=>void;
 }
 const openAi = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
   dangerouslyAllowBrowser: true,
 });
-export default function SummaryToSpeech({ summery, onClick }: SummaryToSpeechProps) {
+export default function ReadOutSpeech({ read: summery, onClick }: ReadOutSpeechProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [audioSrc, setAudioSrc] = useState<string | null>(null);
 
@@ -57,7 +57,7 @@ export default function SummaryToSpeech({ summery, onClick }: SummaryToSpeechPro
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"outline"} onClick={onClick}>Read Summary</Button>
+        <Button variant={"outline"} onClick={onClick}>Read Entire Email</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>Summary</DialogHeader>
