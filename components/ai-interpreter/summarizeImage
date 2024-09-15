@@ -8,7 +8,7 @@ const openAi = new OpenAI({
     dangerouslyAllowBrowser:true
 })
 
-function ImageAnalyzer() {
+export function ImageAnalyzer() {
     const [images, setImages] = useState([]);
     const [description, setDescription] = useState('');
     const [isLoading, setIsLoading] = useState(false);
