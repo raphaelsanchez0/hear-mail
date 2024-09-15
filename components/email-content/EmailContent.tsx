@@ -131,15 +131,6 @@ export default function EmailContent({ session }: EmailContentProps) {
           <div>
             <div className="flex justify-between">
               <div>
-                <h1 className="text-xl font-bold">{email.subject}</h1>
-                <p>From: {email.from}</p>
-                <p>To: {email.to}</p>
-                <p>Date: {email.date}</p>
-              </div>
-            </div>
-            <Separator className="my-4" />
-            <div className="flex justify-between">
-              <div>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -165,6 +156,17 @@ export default function EmailContent({ session }: EmailContentProps) {
                 </Button>
               </div>
             </div>
+            <Separator className="my-4" />
+            <div className="flex justify-between">
+              <div>
+                <h1 className="text-xl font-bold">{email.subject}</h1>
+                <p>From: {email.from}</p>
+                <p>To: {email.to}</p>
+                <p>Date: {email.date}</p>
+              </div>
+            </div>
+            <Separator className="my-4" />
+            
 
             {/* Trash confirmation modal */}
             {showTrashModal && (
@@ -179,7 +181,7 @@ export default function EmailContent({ session }: EmailContentProps) {
               <TrashSuccessModal onClose={handleTrashSucessModalClose} />
             )}
 
-            <Separator className="my-4" />
+            
             <div className="whitespace-pre-wrap p-4 text-sm">
               {/* Render HTML email body if it's HTML */}
               <div dangerouslySetInnerHTML={{ __html: email.body }} />
