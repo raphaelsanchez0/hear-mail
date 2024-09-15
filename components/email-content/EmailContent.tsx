@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import { Forward, Reply, ReplyAll, Trash2 } from "lucide-react";
@@ -10,12 +10,36 @@ import { Avatar, AvatarImage } from "../ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Mail } from "@/utils/types";
 import { format } from "date-fns/format";
+import { Session } from "next-auth";
+import { getEmail } from "@/api/gmail/gmail";
+import { useSearchParams } from "next/navigation";
 
 interface EmailContentProps {
-  mail?: Mail | null;
+  session: Session | null;
 }
 
-export default function EmailContent({ mail }: EmailContentProps) {
+export default function EmailContent({ session }: EmailContentProps) {
+  const [email, setEmail] = useState(null);
+  const searchParams = useSearchParams();
+  const emailID = searchParams.get("emailId");
+  if (emailID) {
+    const email = getEmail(session!.accessToken as string, emailID);
+  }
+
+  useEffect(() => {
+    const fetchEmail = async (id: string) => {
+      const email = await fetch(`/api/get-email?emailId=${id}`);
+      console.log(email.json());
+    };
+    fetchEmail(emailID);
+  }, [emailID]);
+  const mail: Mail = {
+    date: "2021-09-01T12:00:00Z",
+    body: "Hello, World!",
+    name: "John Doe",
+    subject: "Hello, World!",
+    recipientEmail: "test",
+  };
   return (
     <div className="flex-1 p-4">
       <div className="flex justify-between">

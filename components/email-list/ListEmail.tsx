@@ -3,19 +3,21 @@ import React from "react";
 import { Card } from "../ui/card";
 import { GmailMessage } from "@/utils/types";
 import { getSubject } from "@/utils/email/emailHelpers";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface ListEmailProps {
   email: GmailMessage;
 }
 
 export default function ListEmail({ email }: ListEmailProps) {
-  const params = new URLSearchParams();
   const router = useRouter();
-  params.set("emailId", email.id);
+  const pathname = usePathname();
 
   const handleClick = () => {
-    router.push(`#${params.toString()}`);
+    const params = new URLSearchParams();
+    params.set("emailId", email.id);
+
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   return (
