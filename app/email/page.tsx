@@ -1,3 +1,5 @@
+"use client"; // Add this at the top
+
 import EmailContent from "@/components/email-content/EmailContent";
 import EmailList from "@/components/email-list/EmailList";
 import NavButton from "@/components/nav-button/NavButton";
@@ -59,12 +61,6 @@ export default function EmailClientPage() {
           Generate TTS
         </button>
   
-        {/* Button to manually play the audio */}
-        <button 
-          className="mt-4 p-2 bg-green-500 text-white rounded"
-          onClick={() => (document.getElementById('tts-audio') as HTMLAudioElement)?.play()}>
-          Play Audio
-        </button>
 
       </div>
     </div>
