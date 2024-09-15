@@ -1,3 +1,4 @@
+"use client";
 import {
   getEmailFormattedTime,
   getEmailRecipient,
@@ -15,7 +16,7 @@ interface RawEmailBodyProps {
   emailBody: string;
 }
 
-export default function RawEmailBody({ email, emailBody }: RawEmailBodyProps) {
+export default function EmailBody({ email, emailBody }: RawEmailBodyProps) {
   const sender = getEmailSender(email);
   const subject = getEmailSubject(email);
   const recipient = getEmailRecipient(email);
@@ -39,6 +40,13 @@ export default function RawEmailBody({ email, emailBody }: RawEmailBodyProps) {
         </div>
       </div>
       <Separator />
+      <div className="p-2 gap-2 flex">
+        <Button>Summary</Button>
+        <Button>Read Summary</Button>
+        <Button>Read Out</Button>
+        <Button>Attachments</Button>
+      </div>
+
       <div className="flex-1 whitespace-pre-wrap p-4 text-sm">{emailBody}</div>
       <Separator className="mt-auto" />
       <div className="p-4">

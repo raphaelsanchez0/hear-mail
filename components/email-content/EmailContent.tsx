@@ -20,7 +20,7 @@ import {
   getEmailSender,
   getEmailSubject,
 } from "@/utils/email/emailHelpers";
-import RawEmailBody from "./RawEmailBody";
+import RawEmailBody from "./EmailBody";
 
 interface EmailContentProps {
   session: Session | null;
