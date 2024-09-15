@@ -1,5 +1,7 @@
+
 import { IncomingMessage } from "http";
 import { GmailMessage, IncomingEmail } from "../types";
+
 
 export function getSubject(message: GmailMessage): string {
   const subjectHeader = message.payload.headers.find(
@@ -8,6 +10,7 @@ export function getSubject(message: GmailMessage): string {
 
   return subjectHeader ? subjectHeader.value : "";
 }
+
 
 function preprocessHeaders(
   headers: { name: string; value: string }[]
@@ -88,3 +91,4 @@ const decodeBase64 = (encodedData: string): string => {
     return "Failed to load email content.";
   }
 };
+

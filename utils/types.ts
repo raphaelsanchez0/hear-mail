@@ -137,6 +137,7 @@ export interface GmailMessagesResponse {
   // Add more fields as needed
 }
 
+
 export interface IncomingEmail {
   id: string;
   threadId: string;
@@ -172,3 +173,4 @@ export interface IncomingEmail {
   historyId: string;
   internalDate: string;
 }
+

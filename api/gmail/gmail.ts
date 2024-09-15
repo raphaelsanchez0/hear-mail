@@ -1,5 +1,5 @@
 import { GmailMessage, GmailMessagesResponse } from "@/utils/types";
-import { error } from "console";
+
 
 export const getEmails = async (
   accessToken: string,
@@ -22,6 +22,7 @@ export const getEmails = async (
     }
 
     const data: GmailMessagesResponse = await response.json();
+
 
     // Extract the message IDs from the response
     const messageIds = data.messages.map((message) => message.id);
@@ -59,6 +60,8 @@ export const getEmails = async (
     throw error;
   }
 };
+
+
 
 export const getEmail = async (accessToken: string, emailId: string) => {
   const userId = "me"; // Use 'me' to refer to the authenticated user

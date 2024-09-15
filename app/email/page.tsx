@@ -7,6 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Mail } from "@/utils/types";
 import { getServerSession } from "next-auth";
 
+
+
+
 export default async function EmailClientPage() {
   const session = await getServerSession();
 
