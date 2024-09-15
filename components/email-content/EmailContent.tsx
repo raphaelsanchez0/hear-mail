@@ -10,7 +10,7 @@ import { Avatar, AvatarImage } from "../ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Mail } from "@/utils/types";
 import { format } from "date-fns/format";
-import OpenAiProofOfConcept from "@/app/open-ai-test/page";
+import OpenAiProofOfConcept from "@/components/ai-interpreter/chatgpt";
 
 interface EmailContentProps {
   mail?: Mail | null;
