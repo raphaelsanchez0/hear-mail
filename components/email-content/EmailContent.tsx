@@ -21,6 +21,7 @@ import {
   getEmailSubject,
 } from "@/utils/email/emailHelpers";
 import RawEmailBody from "./EmailBody";
+import EmailBody from "./EmailBody";
 
 interface EmailContentProps {
   session: Session | null;
@@ -71,7 +72,7 @@ export default function EmailContent({ session }: EmailContentProps) {
       </div>
       <Separator className="my-4" />
       {email && emailBody ? (
-        <RawEmailBody email={email} emailBody={emailBody} />
+        <EmailBody email={email} emailBody={emailBody} />
       ) : (
         <div className="p-8 text-center text-muted-foreground">
           No message selected

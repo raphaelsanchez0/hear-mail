@@ -12,6 +12,7 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import SummarizeBody from "./SummarizeBody";
 import { useSearchParams } from "next/navigation";
+import FormatBody from "./FormatBody";
 
 interface RawEmailBodyProps {
   email: IncomingEmail;
@@ -70,7 +71,7 @@ export default function EmailBody({ email, emailBody }: RawEmailBodyProps) {
             sender={sender!}
           />
         ) : (
-          <>{emailBody}</>
+          <>{emailBody} </>
         )}
       </div>
       <Separator className="mt-auto" />
