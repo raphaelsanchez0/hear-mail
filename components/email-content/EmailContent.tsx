@@ -25,6 +25,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import RawEmailBody from "./EmailBody";
 import EmailBody from "./EmailBody";
+import SkeletonEmailStack from "../skeletons/SkeletonEmailStack";
 
 function TrashConfirmationModal({ onConfirm, onCancel }: any) {
   return (
@@ -127,8 +128,8 @@ export default function EmailContent({ session }: EmailContentProps) {
 
   return (
     <div className="flex-1 p-4 h-full overflow-y-scroll">
-      {loading ? (
-        <div>Loading email...</div>
+      {loading && emailId ? (
+        <SkeletonEmailStack/>
       ) : (
         email && (
           <div>
