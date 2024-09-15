@@ -13,7 +13,12 @@ import { format } from "date-fns/format";
 import { Session } from "next-auth";
 import { getEmail } from "@/api/gmail/gmail";
 import { useSearchParams } from "next/navigation";
-import { getEmailSender } from "@/utils/email/emailHelpers";
+import {
+  getEmailFormattedTime,
+  getEmailRecipient,
+  getEmailSender,
+  getEmailSubject,
+} from "@/utils/email/emailHelpers";
 
 interface EmailContentProps {
   session: Session | null;
@@ -81,16 +86,18 @@ export default function EmailContent({ session }: EmailContentProps) {
               </Avatar>
               <div className="grid gap-1">
                 <div className="font-semibold">{getEmailSender(email)}</div>
-                <div className="line-clamp-1 text-xs">{mail.subject}</div>
                 <div className="line-clamp-1 text-xs">
-                  <span className="font-medium">Reply-To:</span>{" "}
-                  {mail.recipientEmail}
+                  {getEmailSubject(email)}
+                </div>
+                <div className="line-clamp-1 text-xs">
+                  <span className="font-medium">To:</span>{" "}
+                  {getEmailRecipient(email)}
                 </div>
               </div>
             </div>
             {mail.date && (
               <div className="ml-auto text-xs text-muted-foreground">
-                {format(new Date(mail.date), "PPpp")}
+                {getEmailFormattedTime(email)}
               </div>
             )}
           </div>
