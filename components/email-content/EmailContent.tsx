@@ -44,7 +44,7 @@ export default function EmailContent({ session }: EmailContentProps) {
       setEmailBody(bodyContent);
     };
     fetchEmail(emailID);
-  }, [emailID]);
+  }, [emailID, searchParams]);
   return (
     <div className="flex-1 p-4">
       <div className="flex justify-between">
