@@ -24,7 +24,6 @@ function ImageAnalyzer() {
     try {
         const content = [{ type: "text", text: "Describe these images:" }];
 
-        //Maybe another content.push here with text instead of images
         content.push(...images.map(img => ({
             type: "image_url",
             image_url: { url: img }
