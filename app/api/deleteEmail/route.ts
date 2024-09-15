@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export async function POST(req) {
+export async function POST(req: NextRequest) {
   const session = await getServerSession(authConfig); // Ensure session handling
   try {
     const { emailId } = await req.json(); // Get emailId from the request body
