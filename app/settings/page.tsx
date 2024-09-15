@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import React from "react";
 import { signOut } from "next-auth/react";
 export default function Settings() {
   return (

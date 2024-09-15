@@ -1,8 +1,7 @@
 "use client";
-import React from "react";
-import { Card } from "../ui/card";
-import { GmailMessage } from "@/utils/types";
 import { getSubject } from "@/utils/email/emailHelpers";
+import { GmailMessage } from "@/utils/types";
+import { Card } from "../ui/card";
 
 import { usePathname, useRouter } from "next/navigation";
 

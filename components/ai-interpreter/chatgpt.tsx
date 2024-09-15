@@ -1,8 +1,8 @@
 "use client"
-import React, { useState } from "react";
-import OpenAI from "openai";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import OpenAI from "openai";
+import { useState } from "react";
 
 const openAi = new OpenAI({
     apiKey:process.env.NEXT_PUBLIC_OPENAI_API_KEY,

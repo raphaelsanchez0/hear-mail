@@ -1,10 +1,6 @@
-import { useState } from "react";
 import EmailContent from "@/components/email-content/EmailContent";
 import EmailList from "@/components/email-list/EmailList";
 import Sidebar from "@/components/sidebar/Sidebar";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Mail } from "@/utils/types";
 import { getServerSession } from "next-auth";
 
 

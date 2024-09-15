@@ -6,12 +6,12 @@ import {
   getEmailSubject,
 } from "@/utils/email/emailHelpers";
 import { IncomingEmail } from "@/utils/types";
-import React, { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
 import SummarizeBody from "./SummarizeBody";
-import { useSearchParams } from "next/navigation";
 
 interface RawEmailBodyProps {
   email: IncomingEmail;

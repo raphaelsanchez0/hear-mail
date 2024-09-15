@@ -1,8 +1,8 @@
-import { google } from "googleapis";
-import { NextRequest, NextResponse } from "next/server";
-import dotenv from 'dotenv';
-import { getServerSession } from "next-auth";
 import { authConfig } from "@/lib/auth";
+import dotenv from 'dotenv';
+import { google } from "googleapis";
+import { getServerSession } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
 dotenv.config();
 
 

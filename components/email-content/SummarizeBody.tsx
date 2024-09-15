@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
 import OpenAI from "openai";
+import { useEffect, useState } from "react";
 
 interface SummarizeBodyProps {
   rawEmailBody: string;

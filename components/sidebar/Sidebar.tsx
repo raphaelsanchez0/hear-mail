@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { Button } from "../ui/button";
-import NavButton from "../nav-button/NavButton";
-import { Inbox, Send, Settings, Trash2, File } from "lucide-react";
+import { File, Inbox, Send, Settings, Trash2 } from "lucide-react";
 import { ComposeEmailDialog } from "../compose-email-dialog/ComposeEmailDialog";
+import NavButton from "../nav-button/NavButton";
 
 export default function Sidebar() {
   return (
