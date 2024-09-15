@@ -126,7 +126,7 @@ export default function EmailContent({ session }: EmailContentProps) {
   
 
   return (
-    <div className="flex-1 p-4">
+    <div className="flex-1 p-4 h-full overflow-y-scroll">
       {loading ? (
         <div>Loading email...</div>
       ) : (
