@@ -11,8 +11,12 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Textarea } from "../ui/textarea";
-import SummarizeBody from "./SummarizeBody";
-
+import OpenAI from "openai";
+import SummaryToSpeech from "./SummaryToSpeech";
+const openAi = new OpenAI({
+  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+  dangerouslyAllowBrowser: true,
+});
 interface RawEmailBodyProps {
   email: IncomingEmail;
   emailBody: string;
@@ -20,12 +24,47 @@ interface RawEmailBodyProps {
 
 export default function EmailBody({ email, emailBody }: RawEmailBodyProps) {
   const [showSummary, setShowSummary] = useState(false);
+  const [summary, setSummary] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
   const emailID = searchParams.get("emailId");
   const sender = getEmailSender(email);
   const subject = getEmailSubject(email);
   const recipient = getEmailRecipient(email);
   const formattedTime = getEmailFormattedTime(email);
+  const [summaryResponse, setSummaryResponse] = useState("");
+
+  const prompt = `This is the body of an email. This is a custom email client, 
+      so there may be some formatting issues. Please summarize the following email, keeping it as brief but
+      information as possible, with no effect on the main message or tone.
+      This is the  sender ${sender} and the subject is ${subject}. This is the body
+      of the email: ${emailBody}`;
+
+  useEffect(() => {
+    const fetchSummary = async () => {
+      setIsLoading(true);
+
+      try {
+        const params: OpenAI.Chat.ChatCompletionCreateParams = {
+          messages: [{ role: "user", content: prompt }],
+          model: "gpt-3.5-turbo",
+        };
+        const chatCompletion: OpenAI.Chat.ChatCompletion =
+          await openAi.chat.completions.create(params);
+
+        const chatGPTResponse = chatCompletion.choices[0].message?.content;
+        if (chatGPTResponse) {
+          setSummaryResponse(chatGPTResponse);
+        }
+      } catch (error) {
+        console.error("Error fetching summary:", error);
+      } finally {
+        setIsLoading(false); // Set loading state to false after fetching
+      }
+    };
+
+    fetchSummary();
+  }, [emailBody]);
 
   useEffect(() => {
     setShowSummary(false);
@@ -58,20 +97,13 @@ export default function EmailBody({ email, emailBody }: RawEmailBodyProps) {
         >
           Summary
         </Button>
-        <Button>Read Summary</Button>
+        <SummaryToSpeech summery={summaryResponse} />
+
         <Button>Read Out</Button>
         <Button>Attachments</Button>
       </div>
       <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
-        {showSummary ? (
-          <SummarizeBody
-            rawEmailBody={emailBody}
-            subject={subject!}
-            sender={sender!}
-          />
-        ) : (
-          <>{emailBody}</>
-        )}
+        {showSummary ? <>{summaryResponse} </> : <>{emailBody} </>}
       </div>
       <Separator className="mt-auto" />
       <div className="p-4">
