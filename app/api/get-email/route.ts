@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   const emailId = url.get("emailId");
   const session = await getServerSession(authConfig);
   const userId = "me"; // Use 'me' to refer to the authenticated user
-
+  console.log("session " + session?.accessToken);
   try {
     const response = await fetch(
       `https://gmail.googleapis.com/gmail/v1/users/${userId}/messages/${emailId}`,
@@ -21,8 +21,6 @@ export async function GET(req: NextRequest) {
         },
       }
     );
-
-    console.log(response);
 
     if (!response.ok) {
       console.log(response);

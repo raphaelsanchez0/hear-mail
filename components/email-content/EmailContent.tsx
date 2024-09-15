@@ -29,7 +29,7 @@ export default function EmailContent({ session }: EmailContentProps) {
   useEffect(() => {
     const fetchEmail = async (id: string) => {
       const email = await fetch(`/api/get-email?emailId=${id}`);
-      console.log(email.json());
+      console.log(email);
     };
     fetchEmail(emailID);
   }, [emailID]);

@@ -89,7 +89,6 @@ export const getEmail = async (accessToken: string, emailId: string) => {
     const response = await fetch(
       `https://gmail.googleapis.com/gmail/v1/users/${userId}/messages/${emailId}`,
       {
-        method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
