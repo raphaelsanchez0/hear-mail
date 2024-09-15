@@ -11,11 +11,6 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
-import { useSearchParams } from "next/navigation";
-import FormatBody from "./FormatBody";
-import { Dialog, DialogContent } from "../ui/dialog";
-import { DialogTrigger } from "@radix-ui/react-dialog";
 import OpenAI from "openai";
 import SummaryToSpeech from "./SummaryToSpeech";
 const openAi = new OpenAI({
