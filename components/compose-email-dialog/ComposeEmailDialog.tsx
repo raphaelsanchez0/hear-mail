@@ -19,11 +19,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { composeEmailSchema } from "@/utils/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 
 export function ComposeEmailDialog() {
+  const [dialogOpen, setDialogOpen] = useState(false)
   const form = useForm<z.infer<typeof composeEmailSchema>>({
     resolver: zodResolver(composeEmailSchema),
     defaultValues: {
@@ -53,7 +55,7 @@ export function ComposeEmailDialog() {
   }
 
   return (
-    <Dialog>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
         <Button>Compose</Button>
       </DialogTrigger>
@@ -111,7 +113,7 @@ export function ComposeEmailDialog() {
             )}
           />
 
-          <Button type="submit" className="mt-2">
+          <Button type="submit" className="mt-2" onClick={()=>setDialogOpen(false)}>
             Send Email
           </Button>
         </form>
