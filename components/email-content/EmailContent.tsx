@@ -11,6 +11,7 @@ import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Mail } from "@/utils/types";
 import { format } from "date-fns/format";
 import OpenAiProofOfConcept from "@/components/ai-interpreter/chatgpt";
+import {Summarization} from "@/components/ai-interpreter/chatgpt";
 
 interface EmailContentProps {
   mail?: Mail | null;
@@ -100,7 +101,7 @@ export default function EmailContent({ mail }: EmailContentProps) {
           No message selected
         </div>
       )}
-      <OpenAiProofOfConcept/>
+      <Summarization/>
     </div>
   );
 }
