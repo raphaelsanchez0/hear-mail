@@ -10,7 +10,6 @@ import { IncomingEmail, Mail } from "@/utils/types";
 import { format } from "date-fns/format";
 import { Session } from "next-auth";
 import { getEmail } from "@/api/gmail/gmail";
-import { useSearchParams } from "next/navigation";
 import {
   extractEmailBody,
   getEmailFormattedTime,
