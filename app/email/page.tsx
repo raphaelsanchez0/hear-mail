@@ -16,7 +16,6 @@ export default function EmailClientPage() {
     date: "2021-09-20T12:00:00Z",
     body: "Hello, World! This is a test",
   };
-
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
@@ -36,6 +35,7 @@ export default function EmailClientPage() {
       {/* Email Content */}
 
       <EmailContent mail={exampleMail} />
+
     </div>
   );
 }
