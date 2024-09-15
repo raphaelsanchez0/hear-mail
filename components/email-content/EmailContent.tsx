@@ -25,6 +25,29 @@ interface EmailContentProps {
   session: Session | null;
 }
 
+
+const fetchGoogleTTS = async (text: string) => {
+  const response = await fetch('/api/tts', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ text }),
+  });
+
+  const data = await response.json();
+  
+  // Convert base64 back to binary and create a Blob
+  const binaryData = Uint8Array.from(atob(data.audioContent), c => c.charCodeAt(0));
+  const audioBlob = new Blob([binaryData], { type: 'audio/mp3' });
+  const audioURL = URL.createObjectURL(audioBlob);
+
+  // Play the audio
+  const audioElement = new Audio(audioURL);
+  audioElement.play();
+};
+
+
 export default function EmailContent({ session }: EmailContentProps) {
   const [email, setEmail] = useState<IncomingEmail | null>(null);
   const [emailBody, setEmailBody] = useState<string | null>(null);
@@ -51,6 +74,8 @@ export default function EmailContent({ session }: EmailContentProps) {
     subject: "Hello, World!",
     recipientEmail: "test",
   };
+
+
   return (
     <div className="flex-1 p-4">
       <div className="flex justify-between">
@@ -110,6 +135,14 @@ export default function EmailContent({ session }: EmailContentProps) {
           <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
             {emailBody}
           </div>
+            
+            {/* TTS button */}
+          <button 
+            className="mt-4 p-2 bg-blue-500 text-white rounded"
+            onClick={() => fetchGoogleTTS(emailBody)}>
+            Generate TTS
+          </button>
+
           <Separator className="mt-auto" />
           <div className="p-4">
             <form>
