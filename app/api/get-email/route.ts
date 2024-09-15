@@ -2,7 +2,7 @@ import { authConfig } from "@/lib/auth";
 import { IncomingMessage } from "http";
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const url = req.nextUrl.searchParams;
@@ -25,10 +25,11 @@ export async function GET(req: NextRequest) {
       console.log(response);
       throw new Error(`Error fetching email: ${response.statusText}`);
     }
-    const emailData = await response.json();
 
-    console.dir(emailData, { depth: null });
-    return Response.json(emailData);
+    const parsedRes = await response.json();
+    console.log(parsedRes);
+
+    return NextResponse.json({ parsedRes }, { status: 200 });
   } catch (error) {
     console.error("Failed to fetch email:", error);
   }

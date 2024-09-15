@@ -28,7 +28,9 @@ export default function EmailContent({ session }: EmailContentProps) {
     const fetchEmail = async (id: string | null) => {
       if (!id) return;
       const email = await fetch(`/api/get-email?emailId=${id}`);
-      setEmail(email as unknown as IncomingEmail);
+      const parsedEmail = await email.json();
+      console.log(parsedEmail);
+      setEmail(parsedEmail.parsedRes as unknown as IncomingEmail);
     };
     fetchEmail(emailID);
   }, [emailID]);
@@ -69,7 +71,7 @@ export default function EmailContent({ session }: EmailContentProps) {
           <div className="flex items-start p-4">
             <div className="flex items-start gap-4 text-sm">
               <Avatar>
-                <AvatarImage alt={getEmailSender(email)} />
+                <AvatarImage alt={"Name"} />
                 <AvatarFallback>
                   {mail.name
                     .split(" ")
@@ -78,7 +80,7 @@ export default function EmailContent({ session }: EmailContentProps) {
                 </AvatarFallback>
               </Avatar>
               <div className="grid gap-1">
-                <div className="font-semibold">{mail.name}</div>
+                <div className="font-semibold">{getEmailSender(email)}</div>
                 <div className="line-clamp-1 text-xs">{mail.subject}</div>
                 <div className="line-clamp-1 text-xs">
                   <span className="font-medium">Reply-To:</span>{" "}

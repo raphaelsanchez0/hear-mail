@@ -60,28 +60,6 @@ export const getEmails = async (
   }
 };
 
-// export const getEmail = async (accessToken: string, emailID: string) => {
-//   const endpoint = `https://gmail.googleapis.com/gmail/v1/users/me/messages/${emailID}`;
-//   try {
-//     const response = await fetch(endpoint, {
-//       headers: {
-//         Authorization: `Bearer ${accessToken}`,
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     if (!response.ok) {
-//       console.log(response);
-//       throw new Error(
-//         `Error fetching emails: ${response.status} ${response.statusText}`
-//       );
-//     }
-//     console.log(response);
-//     return response;
-//   } catch (error) {
-//     console.error("Error in getting emails:", error);
-//     throw error;
-//   }
-// };
 export const getEmail = async (accessToken: string, emailId: string) => {
   const userId = "me"; // Use 'me' to refer to the authenticated user
 
@@ -102,7 +80,7 @@ export const getEmail = async (accessToken: string, emailId: string) => {
     }
 
     const emailData = await response.json();
-    console.log(emailData);
+    return emailData;
   } catch (error) {
     console.error("Failed to fetch email:", error);
   }
