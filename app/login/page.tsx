@@ -7,8 +7,8 @@ import {
   CardTitle
 } from "@/components/ui/card";
 
-export const description =
-  "Login with you Google account to access your email inbox.";
+//export const description =
+//  "Login with you Google account to access your email inbox.";
 export default function LoginForm() {
   return (
     <div className="flex items-center justify-center w-full h-screen">
