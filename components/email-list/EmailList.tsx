@@ -1,13 +1,9 @@
-import { List, Search } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { Input } from "../ui/input";
-import { ScrollArea } from "../ui/scroll-area";
-import ListEmail from "./ListEmail";
-import { useSession } from "next-auth/react";
-import { GmailMessage } from "@/utils/types";
 import { getEmails } from "@/api/gmail/gmail";
-import { getServerSession } from "next-auth";
 import { authConfig } from "@/lib/auth";
+import Search from "lucide-react";
+import { getServerSession } from "next-auth";
+import { Input } from "../ui/input";
+import ListEmail from "./ListEmail";
 
 export default async function EmailList() {
   const session = await getServerSession(authConfig);

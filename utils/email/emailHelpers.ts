@@ -1,5 +1,4 @@
 
-import { IncomingMessage } from "http";
 import { GmailMessage, IncomingEmail } from "../types";
 
 

@@ -1,25 +1,15 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Separator } from "../ui/separator";
-import { Button } from "../ui/button";
 import { Forward, Reply, ReplyAll, Trash2 } from "lucide-react";
-import { Textarea } from "../ui/textarea";
-import { Label } from "../ui/label";
-import { Switch } from "../ui/switch";
-import { Avatar, AvatarImage } from "../ui/avatar";
-import { AvatarFallback } from "@radix-ui/react-avatar";
-import { IncomingEmail, Mail } from "@/utils/types";
-import { format } from "date-fns/format";
-import { Session } from "next-auth";
-import { getEmail } from "@/api/gmail/gmail";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
+
 import {
   extractEmailBody,
-  getEmailFormattedTime,
-  getEmailRecipient,
-  getEmailSender,
-  getEmailSubject,
 } from "@/utils/email/emailHelpers";
+import { IncomingEmail } from "@/utils/types";
+import { Session } from "next-auth";
+import { useSearchParams } from "next/navigation";
 import RawEmailBody from "./EmailBody";
 import EmailBody from "./EmailBody";
 
