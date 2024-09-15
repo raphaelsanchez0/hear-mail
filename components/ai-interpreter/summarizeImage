@@ -22,15 +22,12 @@ export function ImageAnalyzer() {
   const handleAnalyze = async () => {
     setIsLoading(true);
     try {
-        const content = [{ type: "text", text: "Describe these images:" }];
-
-        
-
-
-        content.push(...images.map(img => ({
-            type: "image_url",
+        const content= [
+            { type: "text", text: text },
+            ...images.map(img => ({type: "image_url",
             image_url: { url: img }
-        })));
+            }))
+        ];
 
         const response = await openAi.chat.completions.create({
             model: "gpt-4-vision-preview",
