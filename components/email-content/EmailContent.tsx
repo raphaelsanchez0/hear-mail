@@ -13,12 +13,14 @@ import { format } from "date-fns/format";
 import { Session } from "next-auth";
 import { getEmail } from "@/api/gmail/gmail";
 import { useSearchParams } from "next/navigation";
+import ReactHtmlParser from "react-html-parser";
 import {
   extractEmailBody,
   getEmailFormattedTime,
   getEmailRecipient,
   getEmailSender,
   getEmailSubject,
+  isHTML,
 } from "@/utils/email/emailHelpers";
 
 interface EmailContentProps {
@@ -108,7 +110,14 @@ export default function EmailContent({ session }: EmailContentProps) {
           </div>
           <Separator />
           <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
-            {emailBody}
+            {isHTML(emailBody || "") ? (
+              <div
+                dangerouslySetInnerHTML={{ __html: emailBody || "" }}
+                className="whitespace-pre-wrap"
+              />
+            ) : (
+              <pre className="whitespace-pre-wrap">{emailBody}</pre>
+            )}
           </div>
           <Separator className="mt-auto" />
           <div className="p-4">

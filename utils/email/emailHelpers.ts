@@ -88,3 +88,9 @@ const decodeBase64 = (encodedData: string): string => {
     return "Failed to load email content.";
   }
 };
+
+export const isHTML = (content: string): boolean => {
+  const div = document.createElement("div");
+  div.innerHTML = content;
+  return Array.from(div.childNodes).some((node) => node.nodeType === 1);
+};
