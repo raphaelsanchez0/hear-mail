@@ -152,8 +152,21 @@ export interface IncomingEmail {
     }[];
     body: {
       size: number;
-      data: string;
+      data?: string;
     };
+    parts?: {
+      partId: string;
+      mimeType: string;
+      filename: string;
+      headers: {
+        name: string;
+        value: string;
+      }[];
+      body: {
+        size: number;
+        data?: string;
+      };
+    }[];
   };
   sizeEstimate: number;
   historyId: string;

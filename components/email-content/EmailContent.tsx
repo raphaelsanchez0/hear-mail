@@ -14,6 +14,7 @@ import { Session } from "next-auth";
 import { getEmail } from "@/api/gmail/gmail";
 import { useSearchParams } from "next/navigation";
 import {
+  extractEmailBody,
   getEmailFormattedTime,
   getEmailRecipient,
   getEmailSender,
@@ -26,6 +27,7 @@ interface EmailContentProps {
 
 export default function EmailContent({ session }: EmailContentProps) {
   const [email, setEmail] = useState<IncomingEmail | null>(null);
+  const [emailBody, setEmailBody] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const emailID = searchParams.get("emailId");
 
@@ -36,6 +38,9 @@ export default function EmailContent({ session }: EmailContentProps) {
       const parsedEmail = await email.json();
       console.log(parsedEmail);
       setEmail(parsedEmail.parsedRes as unknown as IncomingEmail);
+
+      const bodyContent = extractEmailBody(parsedEmail.parsedRes);
+      setEmailBody(bodyContent);
     };
     fetchEmail(emailID);
   }, [emailID]);
@@ -71,7 +76,7 @@ export default function EmailContent({ session }: EmailContentProps) {
         </div>
       </div>
       <Separator className="my-4" />
-      {email ? (
+      {email && emailBody ? (
         <div className="flex flex-1 flex-col">
           <div className="flex items-start p-4">
             <div className="flex items-start gap-4 text-sm">
@@ -103,7 +108,7 @@ export default function EmailContent({ session }: EmailContentProps) {
           </div>
           <Separator />
           <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
-            {mail.body}
+            {emailBody}
           </div>
           <Separator className="mt-auto" />
           <div className="p-4">

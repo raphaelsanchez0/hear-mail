@@ -54,3 +54,37 @@ export function getEmailFormattedTime(
   }
   return undefined;
 }
+
+export const extractEmailBody = (parsedEmail: IncomingEmail): string => {
+  const parts = parsedEmail?.payload?.parts;
+  let body = "";
+
+  if (parts && Array.isArray(parts)) {
+    for (const part of parts) {
+      if (part.mimeType === "text/plain" || part.mimeType === "text/html") {
+        body = decodeBase64(part.body.data!);
+        break; // Prioritize the first text or HTML part found
+      }
+    }
+  }
+
+  return body;
+};
+
+// Helper function to decode Base64 content
+const decodeBase64 = (encodedData: string): string => {
+  if (!encodedData) return "";
+  try {
+    return decodeURIComponent(
+      atob(encodedData.replace(/-/g, "+").replace(/_/g, "/"))
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+  } catch (e) {
+    console.error("Failed to decode email body", e);
+    return "Failed to load email content.";
+  }
+};
