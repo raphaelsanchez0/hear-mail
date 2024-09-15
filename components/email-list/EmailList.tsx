@@ -1,6 +1,6 @@
 import { getEmails } from "@/api/gmail/gmail";
 import { authConfig } from "@/lib/auth";
-import Search from "lucide-react";
+import {Search} from "lucide-react";
 import { getServerSession } from "next-auth";
 import { Input } from "../ui/input";
 import ListEmail from "./ListEmail";
