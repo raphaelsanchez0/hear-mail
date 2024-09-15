@@ -1,5 +1,6 @@
 import { GmailMessage, GmailMessagesResponse } from "@/utils/types";
 
+
 export const getEmails = async (
   accessToken: string,
   maxResults = 10
@@ -21,7 +22,7 @@ export const getEmails = async (
     }
 
     const data: GmailMessagesResponse = await response.json();
-    console.log(data);
+
 
     // Extract the message IDs from the response
     const messageIds = data.messages.map((message) => message.id);
@@ -57,5 +58,33 @@ export const getEmails = async (
   } catch (error) {
     console.error("Error in getEmails:", error);
     throw error;
+  }
+};
+
+
+
+export const getEmail = async (accessToken: string, emailId: string) => {
+  const userId = "me"; // Use 'me' to refer to the authenticated user
+
+  try {
+    const response = await fetch(
+      `https://gmail.googleapis.com/gmail/v1/users/${userId}/messages/${emailId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      console.log(response);
+      throw new Error(`Error fetching email: ${response.statusText}`);
+    }
+
+    const emailData = await response.json();
+    return emailData;
+  } catch (error) {
+    console.error("Failed to fetch email:", error);
   }
 };

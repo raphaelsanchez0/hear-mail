@@ -12,15 +12,18 @@ export async function POST(req: NextRequest) {
       auth: {
         user: 'your-email@gmail.com',  // Your Gmail address
         pass: 'your-app-password',     // Your Gmail App Password
+
       },
     });
 
     // Email options
     const mailOptions = {
+
       from: 'your-email@gmail.com',
       to: email,
       subject: subject,
       text: message,
+
     };
 
     // Send the email

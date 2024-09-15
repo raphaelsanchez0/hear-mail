@@ -5,15 +5,13 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail } from "@/utils/types";
+import { getServerSession } from "next-auth";
 
-export default function EmailClientPage() {
-  const exampleMail: Mail = {
-    name: "John Doe",
-    subject: "Hello, World!",
-    recipientEmail: "johnDoe@gmail.com",
-    date: "2021-09-20T12:00:00Z",
-    body: "Hello, World! This is a test",
-  };
+
+
+
+export default async function EmailClientPage() {
+  const session = await getServerSession();
 
   return (
     <div className="full-screen-page">
@@ -24,7 +22,7 @@ export default function EmailClientPage() {
       <EmailList />
 
       {/* Email Content */}
-      <EmailContent mail={exampleMail} />
+      <EmailContent session={session} />
 
       {/* Compose Email Form */}
       {/* <div className="w-1/3 p-4">

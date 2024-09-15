@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface User {
   _id: string;
@@ -13,29 +13,31 @@ export default function TestMongo() {
 
   const addUser = async () => {
     try {
-      const response = await fetch('/api/addEmailPassDB', {
-        method: 'POST',
+      const response = await fetch("/api/addEmailPassDB", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: 'john.doe@example.com', pass: 'PASS1234' }),
+        body: JSON.stringify({
+          email: "john.doe@example.com",
+          pass: "PASS1234",
+        }),
       });
 
       const result = await response.json();
-      console.log(result);
-      fetchUsers();  // Refresh the user list after adding a new user
+      fetchUsers(); // Refresh the user list after adding a new user
     } catch (error) {
-      console.error('Error adding user:', error);
+      console.error("Error adding user:", error);
     }
   };
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('/api/getEmailPassDB');
+      const response = await fetch("/api/getEmailPassDB");
       const data: User[] = await response.json();
       setData(data);
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error("Error fetching users:", error);
     }
   };
 
