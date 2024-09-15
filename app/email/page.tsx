@@ -18,17 +18,57 @@ export default function EmailClientPage() {
     body: "Hello, World! This is a test",
   };
 
+
+  const fetchGoogleTTS = async (text: string) => {
+    const response = await fetch('/api/tts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text }),
+    });
+  
+    const data = await response.json();
+    
+    // Convert base64 back to binary and create a Blob
+    const binaryData = Uint8Array.from(atob(data.audioContent), c => c.charCodeAt(0));
+    const audioBlob = new Blob([binaryData], { type: 'audio/mp3' });
+    const audioURL = URL.createObjectURL(audioBlob);
+  
+    // Play the audio
+    const audioElement = new Audio(audioURL);
+    audioElement.play();
+  };
+
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
       <Sidebar />
-
+  
       {/* Email List */}
       <EmailList />
-
+  
       {/* Email Content */}
+      <div>
+        <EmailContent mail={exampleMail} />
+  
+        {/* Manual play button */}
+        <button 
+          className="mt-4 p-2 bg-blue-500 text-white rounded"
+          onClick={() => fetchGoogleTTS(exampleMail.body)}>
+          Generate TTS
+        </button>
+  
+        {/* Button to manually play the audio */}
+        <button 
+          className="mt-4 p-2 bg-green-500 text-white rounded"
+          onClick={() => (document.getElementById('tts-audio') as HTMLAudioElement)?.play()}>
+          Play Audio
+        </button>
 
-      <EmailContent mail={exampleMail} />
+      </div>
     </div>
   );
+  
 }
+
