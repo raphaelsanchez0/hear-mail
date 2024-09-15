@@ -8,7 +8,8 @@ export const authConfig: NextAuthOptions = {
       clientSecret: process.env.NEXT_PUBLIC_GMAIL_CLIENT_SECRET!,
       authorization: {
         params: {
-          scope: "openid https://www.googleapis.com/auth/gmail.readonly", // Add the required Gmail API scopes here
+          scope: "openid https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.compose https://www.googleapis.com/auth/gmail.send",
+           // Add the required Gmail API scopes here
         },
       },
     }),

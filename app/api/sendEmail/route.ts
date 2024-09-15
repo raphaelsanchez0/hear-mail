@@ -1,3 +1,4 @@
+
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
@@ -10,14 +11,14 @@ export async function POST(req: NextRequest) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'your-email@gmail.com', // Replace with your Gmail address
-        pass: 'your-app-password',    // Replace with your Gmail App password (see below)
+        user: 'alafshate.m@gmail.com', // Replace with your Gmail address
+        pass: 'Ovoxo@121212',    // Replace with your Gmail App password (see below)
       },
     });
 
     // Configure the email options
     const mailOptions = {
-      from: 'your-email@gmail.com',  // Sender's email address
+      from: 'alafshate.m@gmail.com',  // Sender's email address
       to: email,                     // Receiver's email address
       subject: subject,              // Subject of the email
       text: message,                 // Message body
