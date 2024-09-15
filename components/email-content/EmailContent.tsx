@@ -11,6 +11,7 @@ import { IncomingEmail } from "@/utils/types";
 import { Session } from "next-auth";
 import { useSearchParams } from "next/navigation";
 import RawEmailBody from "./EmailBody";
+import EmailBody from "./EmailBody";
 
 interface EmailContentProps {
   session: Session | null;
@@ -61,7 +62,7 @@ export default function EmailContent({ session }: EmailContentProps) {
       </div>
       <Separator className="my-4" />
       {email && emailBody ? (
-        <RawEmailBody email={email} emailBody={emailBody} />
+        <EmailBody email={email} emailBody={emailBody} />
       ) : (
         <div className="p-8 text-center text-muted-foreground">
           No message selected

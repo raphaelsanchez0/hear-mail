@@ -1,10 +1,11 @@
+import { IncomingEmail } from "@/utils/types";
 import OpenAI from "openai";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import SkeletonEmailStack from "../skeletons/SkeletonEmailStack";
 
-interface SummarizeBodyProps {
-  rawEmailBody: string;
-  subject: string;
-  sender: string;
+interface FormatBodyProps {
+  email: IncomingEmail;
+  emailBody: string;
 }
 
 const openAi = new OpenAI({
@@ -12,19 +13,14 @@ const openAi = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 
-export default function SummarizeBody({
-  rawEmailBody,
-  subject,
-  sender,
-}: SummarizeBodyProps) {
+export default function FormatBody({ email, emailBody }: FormatBodyProps) {
   const [response, setResponse] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // New loading state
-
+  const [isLoading, setIsLoading] = useState(false);
   const prompt = `This is the body of an email. This is a custom email client, 
-    so there may be some formatting issues. Please summarize the following email, keeping it as brief
-    but conversational as possible.
-    This is the  sender &{sender} and the subject is &{subject}. This is the body
-    of the email: ${rawEmailBody}`;
+    so there may be some formatting issues. Please format the following email, keeping as much detail as possible
+    but making it look nice. Omit anything that somebody wouldn't need to see. Keep any names or important details.
+    Do not include from, to, or subject lines. If you are going include a Dear, please include a name.
+    This is the body of the email: ${emailBody}`;
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -50,17 +46,6 @@ export default function SummarizeBody({
     };
 
     fetchSummary();
-  }, [rawEmailBody]);
-
-  return (
-    <div>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <div>
-          <div className="p-4 text-sm">{response}</div>
-        </div>
-      )}
-    </div>
-  );
+  }, [email]);
+  return <>{isLoading ? <SkeletonEmailStack /> : <>{response}</>}</>;
 }
