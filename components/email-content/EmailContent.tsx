@@ -10,6 +10,7 @@ import { Avatar, AvatarImage } from "../ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Mail } from "@/utils/types";
 import { format } from "date-fns/format";
+import OpenAiProofOfConcept from "@/app/open-ai-test/page";
 
 interface EmailContentProps {
   mail?: Mail | null;
@@ -99,6 +100,7 @@ export default function EmailContent({ mail }: EmailContentProps) {
           No message selected
         </div>
       )}
+      <OpenAiProofOfConcept/>
     </div>
   );
 }
